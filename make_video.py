@@ -179,5 +179,31 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                       "frames": len(clips), "lines": len(lines)}, ensure_ascii=False))
 
 
+def save_to_repo(out_path):
+    """GitHub Actions 上では、できた動画をその場でリポジトリに保存する。
+
+    ワークフローは最後にまとめて保存する作りなので、途中で時間切れになると
+    できた分まで消えてしまう。ここで1本ずつ push しておき、最後のまとめ保存は
+    同じ内容になるよう、コミットだけ取り消して変更はステージに残す
+    （まとめ保存の pull --rebase で空になり、push は「変更なし」で終わる）。
+    """
+    if os.environ.get("GITHUB_ACTIONS") != "true":
+        return
+    name = os.path.basename(out_path)
+    git = ["git", "-c", "user.name=github-actions[bot]",
+           "-c", "user.email=41898282+github-actions[bot]@users.noreply.github.com"]
+    try:
+        run(git + ["add", out_path])
+        run(git + ["commit", "-q", "-m", f"動画を追加: {name}"])
+        run(git + ["pull", "--rebase", "-q", "origin", "main"])
+        run(git + ["push", "-q", "origin", "HEAD:main"])
+        run(git + ["reset", "--soft", "HEAD~1"])
+        print(f"保存しました: {name}")
+    except subprocess.CalledProcessError as e:  # 保存に失敗しても最後のまとめ保存に任せる
+        print(f"その場での保存に失敗: {name}: {e.stderr.decode(errors='ignore')[-300:]}",
+              file=sys.stderr)
+
+
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])
+    save_to_repo(sys.argv[2])
