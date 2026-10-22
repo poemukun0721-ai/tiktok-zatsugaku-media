@@ -53,7 +53,8 @@ def tts(text, path):
     return path
 
 
-def image(prompt, seed, path, tries=5):
+def image(prompt, seed, path, tries=3):
+    """画像を取得してパスを返す。取れなかったら None（呼び出し側で前の絵を使い回す）。"""
     global _last_image_at
     if os.path.exists(path) and os.path.getsize(path) > 10_000:
         return path
@@ -64,17 +65,20 @@ def image(prompt, seed, path, tries=5):
         wait = IMAGE_INTERVAL - (time.time() - _last_image_at)
         if wait > 0:
             time.sleep(wait)
-        _last_image_at = time.time()
         try:
-            with urllib.request.urlopen(url, timeout=120) as r:
+            with urllib.request.urlopen(url, timeout=150) as r:
                 data = r.read()
             if len(data) > 10_000:
                 with open(path, "wb") as f:
                     f.write(data)
                 return path
-        except Exception as e:  # 無料枠の制限(402)や混雑(503)は、間隔をあけて再試行
+        except Exception as e:  # 無料枠の制限(402)・混雑(503)・時間切れは、間隔をあけて再試行
             print(f"image retry {attempt + 1}: {e}", file=sys.stderr)
-    raise RuntimeError(f"画像を取得できませんでした: {prompt[:40]}")
+        finally:
+            # 時間切れの依頼も向こうでは1枚と数えられるので、終わった時点から間隔を数える
+            _last_image_at = time.time()
+    print(f"image skipped: {prompt[:40]}", file=sys.stderr)
+    return None
 
 
 def wrap(text):
@@ -105,6 +109,7 @@ def main(script_path, out_path):
     lines = spec["lines"]
     os.makedirs("work", exist_ok=True)
     clips, audios, subs = [], [], []
+    last_image = None
     t = 0.0
     for i, line in enumerate(lines, 1):
         a = tts(line["text"], f"work/a{i:02d}.mp3")
@@ -118,6 +123,11 @@ def main(script_path, out_path):
         per = seg / len(prompts)
         for j, prompt in enumerate(prompts, 1):
             src = image(prompt, seed + i * 10 + j, f"work/i{i:02d}_{j}.jpg")
+            if src is None:
+                if not last_image:
+                    raise RuntimeError(f"最初の画像を取得できませんでした: {prompt[:40]}")
+                src = last_image  # 取れなかった絵は直前の絵で代用（パンの向きは変わる）
+            last_image = src
             clip = f"work/c{i:02d}_{j}.mp4"
             # 透かしを切り、少し拡大してから左右交互にゆっくりパン（静止画に動きを出す）
             sw, sh = int(W * 1.12) // 2 * 2, int(H * 1.12) // 2 * 2
