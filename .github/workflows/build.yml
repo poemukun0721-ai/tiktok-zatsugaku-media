@@ -1,0 +1,53 @@
+name: 動画を作る
+
+# jobs/<名前>.json（台本）が push されたら、まだ動画がないものを videos/<名前>.mp4 として作って保存する。
+on:
+  push:
+    branches: [main]
+    paths: ["jobs/*.json"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-videos
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 道具を入れる
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-ipafont-gothic > /dev/null
+          pip install -q edge-tts
+
+      - name: 動画を作る
+        run: |
+          mkdir -p videos
+          made=0
+          for job in jobs/*.json; do
+            name=$(basename "$job" .json)
+            [ -f "videos/$name.mp4" ] && continue
+            echo "::group::$name"
+            rm -rf work
+            python make_video.py "$job" "videos/$name.mp4"
+            echo "::endgroup::"
+            made=$((made + 1))
+          done
+          echo "made=$made" >> "$GITHUB_ENV"
+
+      - name: 保存する
+        if: env.made != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add videos/*.mp4
+          git commit -m "動画を追加（${{ env.made }}本）"
+          git pull --rebase -q origin main
+          git push origin HEAD:main
