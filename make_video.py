@@ -33,6 +33,7 @@ STYLE = ("cinematic hand-painted 2D animation, storybook fairytale illustration,
          "no text, no letters, no words, no numbers")
 WATERMARK_CROP = 0.07   # 画像の下端7%を切り捨てる（透かし対策）
 IMAGE_INTERVAL = 47     # Pollinationsの無料枠は「同じIPから45秒に1枚」まで
+IMAGE_BUDGET = 12 * 60  # 1本の画像取得にかける上限（秒）。超えたら残りは前の絵を使い回す
 _last_image_at = 0.0
 
 
@@ -53,7 +54,7 @@ def tts(text, path):
     return path
 
 
-def image(prompt, seed, path, tries=3):
+def image(prompt, seed, path, tries=2):
     """画像を取得してパスを返す。取れなかったら None（呼び出し側で前の絵を使い回す）。"""
     global _last_image_at
     if os.path.exists(path) and os.path.getsize(path) > 10_000:
@@ -66,7 +67,7 @@ def image(prompt, seed, path, tries=3):
         if wait > 0:
             time.sleep(wait)
         try:
-            with urllib.request.urlopen(url, timeout=150) as r:
+            with urllib.request.urlopen(url, timeout=100) as r:
                 data = r.read()
             if len(data) > 10_000:
                 with open(path, "wb") as f:
@@ -110,6 +111,7 @@ def main(script_path, out_path):
     os.makedirs("work", exist_ok=True)
     clips, audios, subs = [], [], []
     last_image = None
+    started = time.time()
     t = 0.0
     for i, line in enumerate(lines, 1):
         a = tts(line["text"], f"work/a{i:02d}.mp3")
@@ -122,7 +124,10 @@ def main(script_path, out_path):
         prompts = line["prompts"]
         per = seg / len(prompts)
         for j, prompt in enumerate(prompts, 1):
-            src = image(prompt, seed + i * 10 + j, f"work/i{i:02d}_{j}.jpg")
+            if last_image and time.time() - started > IMAGE_BUDGET:
+                src = None  # 時間切れ：取得せずに前の絵を使い回す
+            else:
+                src = image(prompt, seed + i * 10 + j, f"work/i{i:02d}_{j}.jpg")
             if src is None:
                 if not last_image:
                     raise RuntimeError(f"最初の画像を取得できませんでした: {prompt[:40]}")
