@@ -1,0 +1,53 @@
+{
+ "seed": 3110,
+ "lines": [
+  {
+   "text": "パンという言葉は、外国から来た、って知ってた？",
+   "prompts": [
+    "a rustic loaf of freshly baked bread on a wooden table, warm morning light",
+    "a basket of bread by a window in a quiet old kitchen"
+   ]
+  },
+  {
+   "text": "日本語の「パン」は、ポルトガル語の「パォン」が由来だとされている。",
+   "prompts": [
+    "an old sailing ship with white sails on the sea at golden hour, storybook style",
+    "an adult baker holding a round loaf in an old European bakery"
+   ]
+  },
+  {
+   "text": "16世紀に来た、ポルトガルの宣教師たちが伝えたと言われている。",
+   "prompts": [
+    "an adult European missionary in a dark robe arriving at a Japanese harbor town, storybook style",
+    "a wooden ship docked at an old Japanese port with mist"
+   ]
+  },
+  {
+   "text": "ポルトガル語のもとをたどると、ラテン語の「パーニス」にたどり着く。",
+   "prompts": [
+    "an ancient stone scroll and a loaf of bread on a table, warm candle light",
+    "an old library with rows of dusty books glowing in lamp light"
+   ]
+  },
+  {
+   "text": "ちなみに英語のブレッドは、まったく別の系統の言葉なんだ。",
+   "prompts": [
+    "two different loaves of bread side by side on a wooden board",
+    "an old wooden signpost pointing in two directions in a misty field"
+   ]
+  },
+  {
+   "text": "日本の「パン」は、昔の旅の名残を今に伝えているのかもしれない。",
+   "prompts": [
+    "a gentle sunrise over the sea with a distant ship, storybook style",
+    "a modern Japanese bakery window with soft golden bread loaves"
+   ]
+  },
+  {
+   "text": "フォローして、次の雑学も受け取ってね！",
+   "prompts": [
+    "a warm basket of bread under soft golden light"
+   ]
+  }
+ ]
+}
