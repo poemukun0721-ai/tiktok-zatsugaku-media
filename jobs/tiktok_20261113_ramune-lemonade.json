@@ -1,0 +1,12 @@
+{
+ "seed": 7021,
+ "lines": [
+  {"text": "ラムネの名前は、実は外国の飲み物から、って知ってた？", "prompts": ["a classic Japanese ramune bottle with a glass marble on a wooden table, bright daylight, cheerful", "cold ramune bottles in a bucket of ice, bright summer daylight"]},
+  {"text": "もとになったのは、英語のレモネードだと言われている。", "prompts": ["a glass of lemonade with lemon slices on a sunny table, bright daylight, cheerful", "fresh yellow lemons in a basket, bright daylight, simple cartoon"]},
+  {"text": "レモネードが日本で、ラムネードと呼ばれ、やがてラムネになったんだ。", "prompts": ["an old Japanese seaside town street in the Edo era, bright daylight, storybook style", "a wooden signboard of a small old drink shop, bright daylight, storybook style"]},
+  {"text": "日本に伝わったのは、幕末の黒船の頃だと言われている。", "prompts": ["a large old black sailing ship on a calm blue bay, bright daylight, storybook style", "a small boat near a big old ship in a harbor, bright daylight, storybook style"]},
+  {"text": "あのビー玉は、瓶のふたの代わり。炭酸の圧力で玉を押しつけているんだ。", "prompts": ["close view of a glass marble inside the neck of a ramune bottle, bright daylight", "colorful glass marbles on a white table, bright daylight, cheerful"]},
+  {"text": "ビー玉という名前は、ガラスを意味するビードロから来たという説もある。", "prompts": ["an old glass bottle and glass marbles on a shelf, bright daylight, storybook style", "sparkling clear glass marbles in sunlight, simple cartoon"]},
+  {"text": "フォローして、次の雑学も受け取ってね！", "prompts": ["a ramune bottle with a sparkling marble on a sunny windowsill, bright daylight, cheerful"]}
+ ]
+}
