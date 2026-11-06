@@ -1,0 +1,50 @@
+{
+ "seed": 1118,
+ "lines": [
+  {
+   "text": "ひまわりはずっと太陽を追うわけじゃないって知ってた？",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon picture-book style, a big yellow sunflower in a sunny field under a blue sky"
+   ]
+  },
+  {
+   "text": "若いひまわりは、朝から夕方まで太陽を追いかけて動くんだ。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon picture-book style, young green sunflowers in a sunny field facing the morning sun",
+    "bright daylight, cheerful, simple cartoon picture-book style, young sunflowers in a field facing the evening sun, warm light"
+   ]
+  },
+  {
+   "text": "夜のあいだに、花はゆっくり東へ戻ると言われている。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon picture-book style, sunflowers turning gently toward the east at sunrise, bright pink and blue sky"
+   ]
+  },
+  {
+   "text": "でも大きく育って花が開くと、動きが止まるんだ。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon picture-book style, a fully bloomed large sunflower standing still in a bright field",
+    "bright daylight, cheerful, simple cartoon picture-book style, a sturdy sunflower stem with big yellow petals under the sun"
+   ]
+  },
+  {
+   "text": "そして多くは、朝日がのぼる東を向いたままになる。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon picture-book style, a row of mature sunflowers all facing the rising sun on the east, sunny morning"
+   ]
+  },
+  {
+   "text": "東向きの花は朝に早くあたたまり、ミツバチが集まりやすいらしい。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon picture-book style, cute bees visiting a sunflower in warm morning sunlight",
+    "bright daylight, cheerful, simple cartoon picture-book style, a honeybee on a yellow sunflower, bright and cheerful"
+   ]
+  },
+  {
+   "text": "フォローして、次の雑学も受け取ってね！",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon picture-book style, a smiling cartoon sunflower waving, bright blue sky"
+   ]
+  }
+ ]
+}
