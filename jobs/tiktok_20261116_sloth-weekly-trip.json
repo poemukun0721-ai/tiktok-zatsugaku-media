@@ -1,0 +1,51 @@
+{
+ "seed": 202,
+ "lines": [
+  {
+   "text": "ナマケモノが週に一度だけ木から降りるって知ってた？",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a cute three-toed sloth hanging from a green tree branch in a sunny rainforest"
+   ]
+  },
+  {
+   "text": "普段は木の上で、ほとんど動かずに暮らしています。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a sloth sleeping peacefully on a branch among bright green leaves",
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a sloth slowly eating a leaf"
+   ]
+  },
+  {
+   "text": "でも五日から七日に一度、わざわざ地面へ降りてきます。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a sloth slowly climbing down a tree trunk in bright sunshine",
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a sloth walking slowly on a green forest floor with flowers"
+   ]
+  },
+  {
+   "text": "目的は、トイレだと言われています。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a sloth digging a small hole at the base of a big tree on sunny grass"
+   ]
+  },
+  {
+   "text": "この旅は危険で、体力もたくさん使います。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a sloth looking around carefully on the forest floor in daylight",
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a tired but cute sloth with a big leaf nearby"
+   ]
+  },
+  {
+   "text": "理由は、毛の中のガと藻の関係が関わるという説があります。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a small cute moth resting on a sloth's green-tinged fur",
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a sloth with gentle green algae tint on its fur in sunshine"
+   ]
+  },
+  {
+   "text": "フォローして、次の雑学も受け取ってね！",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a smiling sloth waving from a tree with a rainbow in the sky"
+   ]
+  }
+ ]
+}

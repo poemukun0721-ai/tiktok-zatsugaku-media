@@ -1,0 +1,50 @@
+{
+ "seed": 101,
+ "lines": [
+  {
+   "text": "卵を産む哺乳類がいるって知ってた？",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a cute platypus standing by a sunny green river bank"
+   ]
+  },
+  {
+   "text": "それがオーストラリアに暮らす、カモノハシです。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a platypus swimming in a clear blue river with green trees",
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a map-like cartoon of Australia with a small platypus"
+   ]
+  },
+  {
+   "text": "カモノハシは、赤ちゃんを産まずに卵を産みます。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a platypus curled around two small cream-colored eggs in a cozy nest of grass"
+   ]
+  },
+  {
+   "text": "卵は、お母さんが体を丸めて温めると言われています。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a mother platypus curled warmly in a sunny burrow entrance with flowers",
+    "bright daylight, cheerful, simple cartoon storybook style, no people, two small eggs glowing softly in a nest"
+   ]
+  },
+  {
+   "text": "それでも、赤ちゃんにはちゃんとお乳をあげます。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a tiny baby platypus snuggled next to its mother on soft grass"
+   ]
+  },
+  {
+   "text": "しかも乳首がなく、お乳はおなかの肌からにじみ出ます。",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a baby platypus resting on its mother's fluffy brown belly in warm sunshine",
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a gentle sparkle of white milk drops on brown fur"
+   ]
+  },
+  {
+   "text": "フォローして、次の雑学も受け取ってね！",
+   "prompts": [
+    "bright daylight, cheerful, simple cartoon storybook style, no people, a smiling platypus waving in a sunny meadow with a rainbow"
+   ]
+  }
+ ]
+}
