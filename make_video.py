@@ -26,11 +26,12 @@ GAP = 0.25          # セリフ間の無音
 WRAP = 13           # 字幕1行あたりの最大文字数
 FONT = "IPAGothic"
 VOICE = "ja-JP-KeitaNeural"
-STYLE = ("cinematic hand-painted 2D animation, storybook fairytale illustration, "
-         "soft painterly rendering, warm volumetric light, deep atmospheric shadows, "
-         "muted jewel-tone palette of deep burgundy, forest green, dusk blue and candle gold, "
-         "delicate linework, dramatic chiaroscuro, dreamy enchanted mood, non-photorealistic, "
-         "no text, no letters, no words, no numbers")
+# 2026-11-08 暮らしテーマに合わせ、暗く不気味になりやすい昔話風から、明るくやさしい画風に変更
+STYLE = ("bright cheerful flat illustration, clean simple shapes, soft rounded forms, "
+         "light pastel color palette with plenty of white, bright even daylight, no dark shadows, "
+         "cozy tidy Japanese home or kitchen atmosphere, friendly and calm mood, "
+         "simple cute objects as the main subject, centered composition, non-photorealistic, "
+         "no candles, no horror, no text, no letters, no words, no numbers")
 WATERMARK_CROP = 0.07   # 画像の下端7%を切り捨てる（透かし対策）
 IMAGE_INTERVAL = 47     # Pollinationsの無料枠は「同じIPから45秒に1枚」まで
 IMAGE_BUDGET = 12 * 60  # 1本の画像取得にかける上限（秒）。超えたら残りは前の絵を使い回す
