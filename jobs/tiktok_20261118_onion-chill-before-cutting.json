@@ -1,0 +1,50 @@
+{
+ "seed": 202,
+ "lines": [
+  {
+   "text": "玉ねぎを冷やしてから切ると、目にしみにくいって知ってた？",
+   "prompts": [
+    "a red-brown onion on a wooden cutting board in a bright kitchen, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "玉ねぎを切ると、涙が出る成分が空気中に広がるんだ。",
+   "prompts": [
+    "a sliced onion with soft wisps of steam rising, simple illustration, bright daylight, cheerful, simple storybook style",
+    "a cartoon adult cook wiping tears while cutting an onion in a bright kitchen, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "この成分は、切った時の酵素の働きで生まれると言われている。",
+   "prompts": [
+    "a close-up of a cut onion with sparkling droplets, simple illustration, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "そこで、切る前に冷蔵庫で冷やしておくと…",
+   "prompts": [
+    "whole onions placed on a shelf in a bright open refrigerator, bright daylight, cheerful, simple storybook style",
+    "a clock beside a refrigerator showing time passing, simple illustration, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "酵素の働きが弱まって、成分が出にくくなるんだって。",
+   "prompts": [
+    "a cheerful adult cook slicing a chilled onion calmly, smiling, bright daylight, cheerful, simple storybook style",
+    "fewer tiny wisps rising from an onion on a cutting board, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "目安は、冷蔵庫で一、二時間ほど。切れ味のいい包丁も大事だよ。",
+   "prompts": [
+    "a sharp kitchen knife beside sliced onion on a wooden board, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "フォローして、次の雑学も受け取ってね！",
+   "prompts": [
+    "a bright kitchen table with a bowl of fresh onions, bright daylight, cheerful, simple storybook style"
+   ]
+  }
+ ]
+}

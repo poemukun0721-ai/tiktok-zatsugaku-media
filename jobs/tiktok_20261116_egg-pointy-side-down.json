@@ -1,0 +1,50 @@
+{
+ "seed": 101,
+ "lines": [
+  {
+   "text": "卵はとがった方を下にして保存するって知ってた？",
+   "prompts": [
+    "a carton of fresh white eggs in a bright kitchen refrigerator, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "実は卵のとがった方と丸い方は、中身がちょっと違うんだ。",
+   "prompts": [
+    "one white egg with a pointed end and a round end on a wooden table, bright daylight, cheerful, simple storybook style",
+    "a cartoon cross section of an egg with a small air pocket at the round end, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "丸い方には、気室という小さな空気のすき間があるんだよ。",
+   "prompts": [
+    "a cutaway egg showing a tiny air space at the round end, simple illustration, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "丸い方を下にすると、気室が動いて傷みやすくなると言われている。",
+   "prompts": [
+    "eggs placed round side down in a carton on a kitchen shelf, bright daylight, cheerful, simple storybook style",
+    "a gentle arrow showing air bubble moving inside an egg, simple illustration, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "だからとがった方を下にすると、長持ちしやすいんだって。",
+   "prompts": [
+    "eggs standing pointed side down in an egg tray inside a fridge, bright daylight, cheerful, simple storybook style",
+    "a smiling happy fresh egg on a kitchen counter, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "卵のパックも、そのまま入れれば自然と向きが合うよ。",
+   "prompts": [
+    "an egg carton neatly placed on a refrigerator door shelf, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "フォローして、次の雑学も受け取ってね！",
+   "prompts": [
+    "a cozy bright kitchen with a basket of fresh eggs, bright daylight, cheerful, simple storybook style"
+   ]
+  }
+ ]
+}
