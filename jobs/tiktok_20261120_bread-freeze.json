@@ -1,0 +1,51 @@
+{
+ "seed": 2011,
+ "lines": [
+  {
+   "text": "食パンは冷蔵より冷凍が向いているって知ってた？",
+   "prompts": [
+    "a loaf of sliced white bread on a wooden table in a bright kitchen, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "冷蔵庫に入れると、なぜかパサパサになるよね。",
+   "prompts": [
+    "a bright open refrigerator with a bread bag on a shelf, bright daylight, cheerful, simple storybook style",
+    "a slice of dry crumbly white bread on a plate, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "パンの主成分のでんぷんは、0〜4度くらいで劣化しやすいと言われている。",
+   "prompts": [
+    "a small cartoon thermometer next to a slice of bread, bright daylight, cheerful, simple storybook style",
+    "a bright refrigerator interior with cool blue light, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "さらに冷蔵庫の中は乾燥していて、水分も抜けやすいんだ。",
+   "prompts": [
+    "tiny water droplets floating away from a slice of bread, simple illustration, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "だから食べきれない分は、冷凍がおすすめ。",
+   "prompts": [
+    "a bright freezer drawer with neat packages, frost sparkles, bright daylight, cheerful, simple storybook style",
+    "an adult hand holding a frozen bread package, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "一枚ずつラップで包んで、保存袋に入れるといいよ。",
+   "prompts": [
+    "slices of bread wrapped individually in plastic wrap on a counter, bright daylight, cheerful, simple storybook style",
+    "a zip freezer bag with wrapped bread slices on a kitchen table, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "フォローして、次の雑学も受け取ってね！",
+   "prompts": [
+    "a golden toasted slice of bread with butter on a bright breakfast table, bright daylight, cheerful, simple storybook style"
+   ]
+  }
+ ]
+}
