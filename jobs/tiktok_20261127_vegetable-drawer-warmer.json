@@ -1,0 +1,51 @@
+{
+ "seed": 301,
+ "lines": [
+  {
+   "text": "冷蔵庫の野菜室が、冷蔵室より少し温かいって知ってた？",
+   "prompts": [
+    "a bright open refrigerator with a vegetable drawer pulled out, fresh vegetables, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "実は、野菜にとって冷蔵室は冷たすぎることがあるんだ。",
+   "prompts": [
+    "a cheerful cartoon carrot wearing a scarf shivering gently, simple illustration, bright daylight, cheerful, simple storybook style",
+    "a bright refrigerator shelf with a small thermometer, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "冷蔵庫はもともと、食品が傷む微生物を抑えるための低温なんだ。",
+   "prompts": [
+    "a clean bright refrigerator interior with milk and eggs on shelves, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "だから野菜室は、少し高めの温度に設定されていると言われている。",
+   "prompts": [
+    "a vegetable drawer with tomatoes, lettuce and cucumbers, a warm gentle glow, bright daylight, cheerful, simple storybook style",
+    "a small thermometer beside a basket of fresh vegetables, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "さらに野菜室は、湿度を保ちやすい作りになっているよ。",
+   "prompts": [
+    "fresh green lettuce with tiny water droplets in a vegetable drawer, bright daylight, cheerful, simple storybook style",
+    "a closed vegetable drawer with a soft misty look, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "なすやきゅうりなど、夏の野菜は寒すぎると傷みやすいんだって。",
+   "prompts": [
+    "an eggplant and cucumbers in a bright kitchen, cheerful, bright daylight, cheerful, simple storybook style",
+    "a plastic bag wrapping fresh cucumbers on a kitchen table, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "フォローして、次の雑学も受け取ってね！",
+   "prompts": [
+    "a bright kitchen with a colorful basket of fresh vegetables, bright daylight, cheerful, simple storybook style"
+   ]
+  }
+ ]
+}
