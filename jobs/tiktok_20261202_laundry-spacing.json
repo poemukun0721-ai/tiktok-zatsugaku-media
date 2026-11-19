@@ -1,0 +1,51 @@
+{
+ "seed": 401,
+ "lines": [
+  {
+   "text": "洗濯物は間隔をあけて干すと早く乾くって知ってた？",
+   "prompts": [
+    "a bright sunny balcony with clothes hanging evenly spaced on a laundry rack, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "ぎゅっと詰めて干すと、なかなか乾かないよね。",
+   "prompts": [
+    "a crowded laundry rack with many shirts tightly packed together, bright daylight, cheerful, simple storybook style",
+    "a smiling adult looking at damp clothes with a puzzled face, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "洗濯物が乾くとき、水分は蒸発して周りの空気に出ていくんだ。",
+   "prompts": [
+    "tiny water droplets rising gently from a wet shirt into the air, illustrated, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "すると洗濯物のまわりに、湿った空気がたまっていく。",
+   "prompts": [
+    "a soft misty cloud around a shirt hanging on a line, bright daylight, cheerful, simple storybook style",
+    "damp clothes pressed close together with a soft mist between them, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "間隔をあけると、湿った空気が逃げて乾いた空気と入れ替わりやすいと言われている。",
+   "prompts": [
+    "gentle wind arrows passing between evenly spaced shirts on a line, bright daylight, cheerful, simple storybook style",
+    "a bright breezy balcony with clothes swaying lightly, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "だから風が通る道をつくるのが、早く乾かすコツなんだ。",
+   "prompts": [
+    "a sunny window with a small fan and clothes spaced out on a rack, bright daylight, cheerful, simple storybook style",
+    "a happy adult hanging laundry neatly in a bright room, bright daylight, cheerful, simple storybook style"
+   ]
+  },
+  {
+   "text": "フォローして、次の雑学も受け取ってね！",
+   "prompts": [
+    "a smiling cartoon sun above a line of fresh white laundry, bright daylight, cheerful, simple storybook style"
+   ]
+  }
+ ]
+}
