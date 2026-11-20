@@ -204,4 +204,3 @@ def save_to_repo(out_path):
 
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])
-    save_to_repo(sys.argv[2])

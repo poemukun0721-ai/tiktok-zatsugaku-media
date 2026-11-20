@@ -17,7 +17,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       fail-fast: false
-      max-parallel: 5
+      max-parallel: 10
       matrix:
         name: [01_sandwich-earl, 02_ramune-lemonade, 03_hotchkiss-name, 04_koala-sleep, 05_flamingo-pink, 06_croissant-moon, 07_kiwi-bird, 08_tempura-word, 09_gorilla-name, 10_sharp-pencil]
     steps:
