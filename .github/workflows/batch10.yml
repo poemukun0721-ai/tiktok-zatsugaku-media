@@ -1,0 +1,57 @@
+name: 雑学10本まとめ作成
+
+# このブランチ専用。batch/*.json を1本ずつ別の作業機で並行して作り、batch_videos/ に保存する。
+# main の jobs/ や videos/ には触れない（TikTokの自動予約に拾われないように）。
+on:
+  push:
+    branches: [batch-zatsugaku-20261120]
+    paths: ["batch/*.json", ".github/workflows/batch10.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        name: [01_sandwich-earl, 02_ramune-lemonade, 03_hotchkiss-name, 04_koala-sleep, 05_flamingo-pink, 06_croissant-moon, 07_kiwi-bird, 08_tempura-word, 09_gorilla-name, 10_sharp-pencil]
+    steps:
+      - uses: actions/checkout@v4
+      - name: 道具を入れる
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-ipafont-gothic > /dev/null
+          pip install -q edge-tts
+      - name: 動画を作る
+        run: |
+          mkdir -p out
+          python make_video.py batch/${{ matrix.name }}.json out/${{ matrix.name }}.mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: out/${{ matrix.name }}.mp4
+
+  save:
+    needs: build
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: dl
+      - name: 保存する
+        run: |
+          mkdir -p batch_videos
+          find dl -name '*.mp4' -exec cp {} batch_videos/ \;
+          ls -la batch_videos
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add batch_videos
+          git commit -m "雑学10本を保存" || exit 0
+          git push origin HEAD:batch-zatsugaku-20261120
