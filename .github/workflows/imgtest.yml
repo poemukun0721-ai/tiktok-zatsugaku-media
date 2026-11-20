@@ -1,0 +1,31 @@
+name: 画像テスト
+on:
+  push:
+    branches: [batch-zatsugaku-20261120]
+    paths: [".github/workflows/imgtest.yml"]
+permissions:
+  contents: write
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: try
+        run: |
+          mkdir -p imgtest
+          P="a koala sleeping in a eucalyptus tree"
+          S="cinematic hand-painted 2D animation, storybook fairytale illustration, soft painterly rendering, warm light, no text"
+          get(){ n=$1; url=$2; code=$(curl -s -o imgtest/$n.jpg -w '%{http_code}' -m 120 "$url"); echo "$n $code $(stat -c%s imgtest/$n.jpg 2>/dev/null)"; sleep 20; }
+          q(){ python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$1"; }
+          curl -s -m 30 https://image.pollinations.ai/models; echo
+          get a_flux_long "https://image.pollinations.ai/prompt/$(q "$P, $S")?width=1080&height=1920&model=flux&nologo=true&seed=5"
+          get b_flux_short "https://image.pollinations.ai/prompt/$(q "$P, storybook illustration")?width=1080&height=1920&model=flux&nologo=true&seed=5"
+          get c_turbo "https://image.pollinations.ai/prompt/$(q "$P, $S")?width=1080&height=1920&model=turbo&nologo=true&seed=5"
+          get d_default_small "https://image.pollinations.ai/prompt/$(q "$P, $S")?width=576&height=1024&nologo=true&seed=5"
+          get e_gptimage "https://image.pollinations.ai/prompt/$(q "$P, $S")?width=1024&height=1536&model=gptimage&nologo=true&seed=5"
+          get f_kontext "https://image.pollinations.ai/prompt/$(q "$P, $S")?width=768&height=1344&model=kontext&nologo=true&seed=5"
+          ls -la imgtest
+      - name: save
+        run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add imgtest; git commit -m "画像テスト" || exit 0; git pull --rebase -q origin batch-zatsugaku-20261120; git push origin HEAD:batch-zatsugaku-20261120
