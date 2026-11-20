@@ -1,0 +1,1 @@
+{"status":403,"success":false,"error":{"code":"FORBIDDEN","message":"kontext isn't part of the Classic API. Use it with a pollen key at https://enter.pollinations.ai/?ref=classic","timestamp":"2026-11-20T14:25:37.440Z","fixUrl":"https://enter.pollinations.ai/?ref=classic"}}
