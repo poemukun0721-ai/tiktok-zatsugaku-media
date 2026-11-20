@@ -1,0 +1,207 @@
+#!/usr/bin/env python3
+"""TikTok雑学動画を無料ツールだけで作る（クラウドの定期実行で使う）。
+
+使い方: python3 make_video.py script.json out.mp4
+script.json:
+  {"seed": 123, "lines": [{"text": "セリフ", "prompts": ["画像の指示(英語)", ...]}, ...]}
+
+- 音声: edge-tts（Microsoftの無料音声、ja-JP-KeitaNeural）
+- 画像: Pollinations（無料の画像生成、登録不要）。右下の透かしは下端を切って消す
+- 組み立て: ffmpeg。各セリフの音声の長さに合わせて画像をゆっくりパンし、字幕を焼き込む
+出力は 1080x1920 / 30fps の mp4 1本。
+"""
+import asyncio
+import json
+import os
+import subprocess
+import sys
+import time
+import urllib.parse
+import urllib.request
+
+import edge_tts
+
+W, H, FPS = 1080, 1920, 30
+GAP = 0.25          # セリフ間の無音
+WRAP = 13           # 字幕1行あたりの最大文字数
+FONT = "IPAGothic"
+VOICE = "ja-JP-KeitaNeural"
+# 2026-11-08 暮らしテーマに合わせ、暗く不気味になりやすい昔話風から、明るくやさしい画風に変更
+STYLE = ("storybook fairytale illustration, hand-painted, soft warm light, gentle bright colors, "
+         "rich detail, the described subject in the center, non-photorealistic, no horror, no text, no letters")
+WATERMARK_CROP = 0.07   # 画像の下端7%を切り捨てる（透かし対策）
+IMAGE_INTERVAL = 47     # Pollinationsの無料枠は「同じIPから45秒に1枚」まで
+IMAGE_BUDGET = 12 * 60  # 1本の画像取得にかける上限（秒）。超えたら残りは前の絵を使い回す
+_last_image_at = 0.0
+
+
+def run(cmd):
+    subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+
+
+def duration(path):
+    out = subprocess.check_output([
+        "ffprobe", "-v", "error", "-show_entries", "format=duration",
+        "-of", "default=nw=1:nk=1", path])
+    return float(out)
+
+
+def tts(text, path):
+    if not (os.path.exists(path) and os.path.getsize(path) > 0):
+        asyncio.run(edge_tts.Communicate(text, VOICE).save(path))
+    return path
+
+
+def image(prompt, seed, path, tries=2):
+    """画像を取得してパスを返す。取れなかったら None（呼び出し側で前の絵を使い回す）。"""
+    global _last_image_at
+    if os.path.exists(path) and os.path.getsize(path) > 10_000:
+        return path
+    q = urllib.parse.quote(f"{prompt}, {STYLE}")
+    url = (f"https://image.pollinations.ai/prompt/{q}"
+           f"?width=1080&height=1920&model=flux&nologo=true&seed={seed}")
+    for attempt in range(tries):
+        wait = IMAGE_INTERVAL - (time.time() - _last_image_at)
+        if wait > 0:
+            time.sleep(wait)
+        try:
+            with urllib.request.urlopen(url, timeout=100) as r:
+                data = r.read()
+            if len(data) > 10_000:
+                with open(path, "wb") as f:
+                    f.write(data)
+                return path
+        except Exception as e:  # 無料枠の制限(402)・混雑(503)・時間切れは、間隔をあけて再試行
+            print(f"image retry {attempt + 1}: {e}", file=sys.stderr)
+        finally:
+            # 時間切れの依頼も向こうでは1枚と数えられるので、終わった時点から間隔を数える
+            _last_image_at = time.time()
+    print(f"image skipped: {prompt[:40]}", file=sys.stderr)
+    return None
+
+
+def wrap(text):
+    # 句読点の直後で優先的に改行し、それでも長ければ WRAP 文字で折る
+    lines, cur = [], ""
+    for ch in text:
+        cur += ch
+        if len(cur) >= WRAP or (ch in "、。！？" and len(cur) >= WRAP * 0.6):
+            lines.append(cur)
+            cur = ""
+    if cur:
+        if lines and len(cur) <= 2:
+            lines[-1] += cur
+        else:
+            lines.append(cur)
+    return r"\N".join(lines)
+
+
+def ass_time(t):
+    h, rem = divmod(t, 3600)
+    m, s = divmod(rem, 60)
+    return f"{int(h)}:{int(m):02d}:{s:05.2f}"
+
+
+def main(script_path, out_path):
+    spec = json.load(open(script_path, encoding="utf-8"))
+    seed = int(spec.get("seed", 1))
+    lines = spec["lines"]
+    os.makedirs("work", exist_ok=True)
+    clips, audios, subs = [], [], []
+    last_image = None
+    started = time.time()
+    t = 0.0
+    for i, line in enumerate(lines, 1):
+        a = tts(line["text"], f"work/a{i:02d}.mp3")
+        seg = duration(a) + GAP
+        padded = f"work/a{i:02d}.wav"
+        run(["ffmpeg", "-y", "-i", a, "-af", f"apad=whole_dur={seg}",
+             "-ar", "44100", "-ac", "2", padded])
+        audios.append(padded)
+        subs.append((t, t + seg, line["text"]))
+        prompts = line["prompts"]
+        per = seg / len(prompts)
+        for j, prompt in enumerate(prompts, 1):
+            if last_image and time.time() - started > IMAGE_BUDGET:
+                src = None  # 時間切れ：取得せずに前の絵を使い回す
+            else:
+                src = image(prompt, seed + i * 10 + j, f"work/i{i:02d}_{j}.jpg")
+            if src is None:
+                if not last_image:
+                    raise RuntimeError(f"最初の画像を取得できませんでした: {prompt[:40]}")
+                src = last_image  # 取れなかった絵は直前の絵で代用（パンの向きは変わる）
+            last_image = src
+            clip = f"work/c{i:02d}_{j}.mp4"
+            # 透かしを切り、少し拡大してから左右交互にゆっくりパン（静止画に動きを出す）
+            sw, sh = int(W * 1.12) // 2 * 2, int(H * 1.12) // 2 * 2
+            direction = "(iw-ow)*t/{d}" if (i + j) % 2 else "(iw-ow)*(1-t/{d})"
+            x = direction.format(d=per)
+            vf = (f"crop=iw:ih*{1 - WATERMARK_CROP}:0:0,"
+                  f"scale={sw}:{sh}:force_original_aspect_ratio=increase,"
+                  f"crop={sw}:{sh},crop={W}:{H}:x='{x}':y='(ih-oh)/2',"
+                  f"fps={FPS},format=yuv420p")
+            run(["ffmpeg", "-y", "-loop", "1", "-t", f"{per:.3f}", "-i", src,
+                 "-vf", vf, "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", clip])
+            clips.append(clip)
+        t += seg
+
+    with open("work/v.txt", "w") as f:
+        f.writelines(f"file '{os.path.basename(c)}'\n" for c in clips)
+    with open("work/a.txt", "w") as f:
+        f.writelines(f"file '{os.path.basename(a)}'\n" for a in audios)
+    run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", "work/v.txt", "-c", "copy", "work/video.mp4"])
+    run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", "work/a.txt", "work/audio.wav"])
+
+    with open("work/subs.ass", "w", encoding="utf-8") as f:
+        f.write(f"""[Script Info]
+ScriptType: v4.00+
+PlayResX: {W}
+PlayResY: {H}
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,{FONT},78,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,1,0,0,0,100,100,0,0,1,6,2,2,60,60,520,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+""")
+        for s, e, text in subs:
+            f.write(f"Dialogue: 0,{ass_time(s)},{ass_time(e)},Default,,0,0,0,,{wrap(text)}\n")
+
+    run(["ffmpeg", "-y", "-i", "work/video.mp4", "-i", "work/audio.wav",
+         "-vf", "subtitles=work/subs.ass", "-c:v", "libx264", "-preset", "medium",
+         "-crf", "20", "-c:a", "aac", "-b:a", "192k", "-shortest",
+         "-movflags", "+faststart", out_path])
+    print(json.dumps({"out": out_path, "seconds": round(duration(out_path), 2),
+                      "frames": len(clips), "lines": len(lines)}, ensure_ascii=False))
+
+
+def save_to_repo(out_path):
+    """GitHub Actions 上では、できた動画をその場でリポジトリに保存する。
+
+    ワークフローは最後にまとめて保存する作りなので、途中で時間切れになると
+    できた分まで消えてしまう。ここで1本ずつ push しておき、最後のまとめ保存は
+    同じ内容になるよう、コミットだけ取り消して変更はステージに残す
+    （まとめ保存の pull --rebase で空になり、push は「変更なし」で終わる）。
+    """
+    if os.environ.get("GITHUB_ACTIONS") != "true":
+        return
+    name = os.path.basename(out_path)
+    git = ["git", "-c", "user.name=github-actions[bot]",
+           "-c", "user.email=41898282+github-actions[bot]@users.noreply.github.com"]
+    try:
+        run(git + ["add", out_path])
+        run(git + ["commit", "-q", "-m", f"動画を追加: {name}"])
+        run(git + ["pull", "--rebase", "-q", "origin", "main"])
+        run(git + ["push", "-q", "origin", "HEAD:main"])
+        run(git + ["reset", "--soft", "HEAD~1"])
+        print(f"保存しました: {name}")
+    except subprocess.CalledProcessError as e:  # 保存に失敗しても最後のまとめ保存に任せる
+        print(f"その場での保存に失敗: {name}: {e.stderr.decode(errors='ignore')[-300:]}",
+              file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main(sys.argv[1], sys.argv[2])
+    save_to_repo(sys.argv[2])
