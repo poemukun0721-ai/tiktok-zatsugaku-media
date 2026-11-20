@@ -1,5 +1,5 @@
 {
-"seed": 606,
+"seed": 607,
 "lines": [
 {
 "text": "クロワッサンの名前の意味、って知ってた？",
@@ -11,14 +11,14 @@
 {
 "text": "クロワッサンは、フランス語で「三日月」という意味なんだ。",
 "prompts": [
-"a thin crescent moon over Paris rooftops at night",
-"a croissant placed under a crescent moon in the sky"
+"a thin crescent moon over old Paris rooftops at night, no people",
+"a croissant on a windowsill under a crescent moon, no people"
 ]
 },
 {
 "text": "たしかに、あの形は三日月にそっくりだよね。",
 "prompts": [
-"a croissant and a crescent moon side by side, dreamy painterly"
+"a single golden croissant on a plate under a glowing crescent moon in the night sky, no people"
 ]
 },
 {
@@ -31,7 +31,8 @@
 {
 "text": "それがフランスで、今のサクサクの形になったんだ。",
 "prompts": [
-"a French baker folding butter into dough in a warm kitchen"
+"a bearded adult male French baker in a white apron folding dough in a warm bakery kitchen",
+"a tray of fresh flaky croissants coming out of a brick oven, no people"
 ]
 },
 {
@@ -43,7 +44,7 @@
 {
 "text": "フォローして、次の雑学も受け取ってね！",
 "prompts": [
-"a cozy breakfast table with croissants and coffee in morning light"
+"a cozy breakfast table with croissants and coffee in morning light, no people"
 ]
 }
 ]

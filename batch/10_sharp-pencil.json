@@ -1,5 +1,5 @@
 {
-"seed": 1010,
+"seed": 1011,
 "lines": [
 {
 "text": "家電メーカー「シャープ」の名前の由来、って知ってた？",
@@ -11,20 +11,20 @@
 {
 "text": "由来は、なんとシャープペンシルなんだ。",
 "prompts": [
-"a close up of a mechanical pencil tip drawing a line on paper"
+"a close up of a metal mechanical pencil drawing a line on paper, no people"
 ]
 },
 {
 "text": "大正時代、創業者が金属製のシャープペンシルを考え出した。",
 "prompts": [
-"a Taisho era Japanese workshop with a craftsman making small metal parts",
-"an inventor working at a workbench under a warm lamp"
+"a middle-aged Japanese man with a mustache in 1910s clothes working at a workbench under a warm lamp",
+"close up of small brass pencil parts and tools on an old wooden workbench, no people"
 ]
 },
 {
 "text": "このペンが大ヒットして、会社の名前にもなったんだ。",
 "prompts": [
-"a busy old Japanese street with a small shop and people buying pencils"
+"an old Japanese shop counter displaying metal mechanical pencils in a wooden case, no people"
 ]
 },
 {
