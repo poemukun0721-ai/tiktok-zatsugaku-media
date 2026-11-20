@@ -17,7 +17,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       fail-fast: false
-      max-parallel: 10
+      max-parallel: 5
       matrix:
         name: [01_sandwich-earl, 02_ramune-lemonade, 03_hotchkiss-name, 04_koala-sleep, 05_flamingo-pink, 06_croissant-moon, 07_kiwi-bird, 08_tempura-word, 09_gorilla-name, 10_sharp-pencil]
     steps:
@@ -30,7 +30,7 @@ jobs:
       - name: 動画を作る
         run: |
           mkdir -p out
-          python make_video.py batch/${{ matrix.name }}.json out/${{ matrix.name }}.mp4
+          python batch/make_video_batch.py batch/${{ matrix.name }}.json out/${{ matrix.name }}.mp4
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.name }}
@@ -47,7 +47,7 @@ jobs:
           path: dl
       - name: 保存する
         run: |
-          mkdir -p batch_videos
+          rm -rf batch_videos; mkdir -p batch_videos
           find dl -name '*.mp4' -exec cp {} batch_videos/ \;
           ls -la batch_videos
           git config user.name "github-actions[bot]"
